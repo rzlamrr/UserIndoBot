@@ -21,7 +21,7 @@ spamwatch
 speedtest-cli>=2.0.2
 sqlalchemy
 telegraph
-telethon==1.16.4
+telethon
 wget
 wikipedia
 hurry.filesize
