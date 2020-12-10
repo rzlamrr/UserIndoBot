@@ -18,7 +18,7 @@ from io import BytesIO
 from time import sleep
 
 from telegram import TelegramError
-from telegram.error import BadRequest, TimedOut
+from telegram.error import BadRequest, Unauthorized
 from telegram.ext import CommandHandler, Filters, MessageHandler
 
 import ubotindo.modules.sql.users_sql as sql
@@ -121,15 +121,13 @@ def chats(update, context):
 
 def chat_checker(update, context):
     try:
-        if (
+    	(
             update.effective_message.chat.get_member(
                 context.bot.id
             ).can_send_messages
             is False
         ):
-            context.bot.leaveChat(update.effective_message.chat.id)
-    except TimedOut:
-        return
+        	context.bot.leaveChat(update.effective_message.chat.id)
     except Unauthorized:
     	pass
 
