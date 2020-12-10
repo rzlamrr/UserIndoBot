@@ -17,6 +17,7 @@
 from functools import wraps
 from telegram import User, Chat, ChatMember
 from telegram.error import BadRequest
+from time import perf_counter
 
 from ubotindo import (
     DEL_CMDS,
@@ -29,7 +30,7 @@ from cachetools import TTLCache
 from threading import RLock
 
 # refresh cache 10m
-ADMIN_CACHE = TTLCache(maxsize=512, ttl=60 * 10)
+ADMIN_CACHE = TTLCache(maxsize=512, ttl=60 * 10, timer=perf_counter)
 THREAD_LOCK = RLock()
 
 
@@ -183,7 +184,7 @@ def user_admin(func):
         elif DEL_CMDS and " " not in update.effective_message.text:
             try:
                 update.effective_message.delete()
-            except BadRequest:
+            except:
                 pass
 
         else:
@@ -205,7 +206,10 @@ def user_admin_no_reply(func):
             pass
 
         elif DEL_CMDS and " " not in update.effective_message.text:
-            update.effective_message.delete()
+            try:
+                update.effective_message.delete()
+            except:
+                pass
 
     return is_admin
 

@@ -25,3 +25,4 @@ telethon==1.16.4
 wget
 wikipedia
 hurry.filesize
+pyrate-limiter
