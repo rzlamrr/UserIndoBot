@@ -129,7 +129,9 @@ def chat_checker(update, context):
         ):
             context.bot.leaveChat(update.effective_message.chat.id)
     except TimedOut:
-        pass
+        return
+    except Unauthorized:
+    	pass
 
 
 def __user_info__(user_id):
