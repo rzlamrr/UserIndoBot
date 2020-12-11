@@ -120,9 +120,9 @@ def chats(update, context):
 
 def chat_checker(update, context):
     try:
-        update.effective_message.chat.get_member(
-            context.bot.id).can_send_messages is False
-        context.bot.leaveChat(update.effective_message.chat.id)
+        if update.effective_message.chat.get_member(
+                context.bot.id).can_send_messages is False:
+            context.bot.leaveChat(update.effective_message.chat.id)
     except Unauthorized:
         pass
 
