@@ -80,8 +80,7 @@ def broadcast(update, context):
 
         update.effective_message.reply_text(
             "Broadcast complete. {} groups failed to receive the message, probably "
-            "due to being kicked.".format(failed)
-        )
+            "due to being kicked.".format(failed))
 
 
 def log_user(update, context):
@@ -121,15 +120,11 @@ def chats(update, context):
 
 def chat_checker(update, context):
     try:
-    	(
-            update.effective_message.chat.get_member(
-                context.bot.id
-            ).can_send_messages
-            is False
-        ):
-        	context.bot.leaveChat(update.effective_message.chat.id)
+        update.effective_message.chat.get_member(
+            context.bot.id).can_send_messages is False
+        context.bot.leaveChat(update.effective_message.chat.id)
     except Unauthorized:
-    	pass
+        pass
 
 
 def __user_info__(user_id):
